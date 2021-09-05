@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1                    # v1.19 or later required
+kind: Ingress
+metadata:
+  name: some-domain.com                             # Map in DNS or local hosts file for testing
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /splash
+        pathType: Prefix
+        backend:
+          service:
+            name: my-nginx
+            port:
+              number: 80
